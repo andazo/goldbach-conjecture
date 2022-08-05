@@ -1,0 +1,119 @@
+main(argc, argv[]):
+    error = success
+    if shared data then
+        shraed thread_count = sysconf
+        scanf(shared sizeCasos):
+        for index := 0 to sizeCasos do
+            scanf(shared casosPrueba[index]);
+        end for
+        for index := 2 to numero_Mayor do
+            if Erastostenes[index] == 0 then
+                for indicator := 2 to numero_Mayor do
+                    result = index * indicator
+                    if result > numero_Mayor then
+                        Erastostenes[result] = 1;
+                    end if
+                end for
+            end if
+        end for
+        for index := 2 to numero_Mayor do
+            if Erastostenes[index] = 0 then
+                shared primos[contador_Primos]
+                shraed contador_Primos++
+            end if
+        end for
+        if EXIT_SUCCES then 
+            shared Goldbach_sem
+            if shared Goldbach_sem then 
+                error = measure_goldbach();
+            end if 
+            else then
+                printf("could not allocate semaphores\n");
+            end else
+            free(shared data)
+        end if
+        else then 
+            printf(stderr, "could not allocate shared memory\n");
+        end else
+        /*
+        shared Goldbach = createMatrix(shared thread_count,row,col)
+        execute_threads(shared data)
+        freeMatrix(shared thread_count,shared Goldbach)
+        */
+        free(shared casosPrueba)
+        free(Erastostenes)
+        free(shared primos)
+    end if
+    return error
+execute_threads:
+
+clock_gettime(start);
+error = create_threads()
+clock_gettime(finish);
+for index := 0 to sizeCasos do
+    print("Sumas de Goldbach", Goldbach[index])
+end for
+tiempo_threads(milisegundos);
+print("El tiempo de ejecucion fue: ",tiempo_threads)
+return error
+create_threads:
+    error = success
+    pthread_t* threads = calloc(shared thread_count)
+    if threads then 
+        for index := 0 to shared thread_count do
+            error = sem_init(Goldbach_sem[index])
+            thread_number = index
+            if pthread_create(threads[index]) = error then
+                print("El hilo ha sido creado")
+        end for
+        for index := 0 to shared thread_count do 
+            pthread_join(threads[index])
+            sem_destroy(Goldbach_sem[index])
+        end for
+        free(threads)
+        free(private_data)
+    end if
+    return error
+
+run_Goldbach:
+
+    private_data = (private_data*)data
+    shared_data = private_data
+    primos = shared primos
+    casosPrueba = shared casosPrueba
+    contador_Primos = shared contador_Primos
+    thread_id = private_data -> thread_number
+    sumas_encontradas = 0
+
+    sem_wait(Goldbach_sem[my_thread_id]);
+    Goldbach(primos,casosPrueba[my_thread_id],contador_Primos);
+    sem_post(Goldbach_sem[(my_thread_id + 1));
+	
+    return NULL;
+/*
+create_Matrix:
+
+    matrix = calloc(row_count)
+    for row := 0 to row_count do
+        if matrix[row] = 0 then 
+            free_matrix(row_count,matrix)
+            return 0
+        end if
+    end for
+
+    return matrix
+
+free_matrix:
+
+    if matrix then 
+        for row := 0 to row_count do 
+            free(matrix[row])
+        end for
+    end if
+*/
+Conjetura_fuerte:
+//Desarrollado en la tarea 1
+Conjetura_Debil:
+//Desarrollado en la tarea 1
+Goldbach:
+//Desarrollado en la tarea 1

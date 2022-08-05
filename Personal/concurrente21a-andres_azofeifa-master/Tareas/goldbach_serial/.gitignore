@@ -1,0 +1,7 @@
+goldbach_serial_B90837
+goldbach_serial_B90837_asan
+goldbach_serial_B90837_msan
+goldbach_serial_B90837_tsan
+goldbach_serial_B90837_ubsan
+../goldbach_pthread/build/goldbach.o ../goldbach_pthread/build/matrix.o
+../goldbach_pthread/build/goldbach.o ../goldbach_pthread/build/matrix.o

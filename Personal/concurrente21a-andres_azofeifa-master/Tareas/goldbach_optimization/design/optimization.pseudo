@@ -1,0 +1,88 @@
+main(argc, argv[]):
+
+    error = success
+    sthread_count = sysconf
+    if argc == 2 then
+        if sscanf(thread_count) != 1 || errno) then
+            error = 1;
+        end if
+    end if
+
+    input_casos()
+    create_matrix()
+    error = create_threads(shared_data)
+    printSafeMatrix()
+
+    return error
+
+execute_threads:
+
+    error = EXIT_SUCCESS;
+
+    pthread_mutex_init()
+    pthread_cond_init()
+
+ 
+    for index := 0 to thread_count do
+            thread_number = index;
+
+        if error == EXIT_SUCCESS then
+            if pthread_create() == EXIT_SUCCESS) then
+            else 
+                error = 21;
+                thread_count = index;
+                break;
+            else then
+                error = 22;
+                thread_count = index;
+                break;
+            end if
+        end if
+    end for
+
+
+    for index := 0 to size do
+        .goldbachFunction = &execute_Goldbach,
+        .caso = data.casosPrueba[i],
+        .contador = taskCount
+        submitTask()
+    end for
+
+    for index := 0 to thread_count do
+        pthread_join();
+    end for
+
+    return error;
+
+startThread:
+
+    while 1 do
+
+        pthread_mutex_lock()
+        while taskCount == 0 do
+        pthread_cond_wait()
+        end while
+
+        task = sums_Queue[0]
+        for index := 0 to taskCount do
+        sums_Queue[i] = sums_Queue[i + 1]
+        end for
+
+        taskCount--
+        pthread_mutex_unlock()
+
+        executeTask()
+
+        if taskCount == 0 then
+        break
+        end if
+
+    end while
+
+submitTask:
+
+    pthread_mutex_lock()
+    sums_Queue[taskCount] = task
+    taskCount++
+    pthread_mutex_unlock()
+    pthread_cond_signal()

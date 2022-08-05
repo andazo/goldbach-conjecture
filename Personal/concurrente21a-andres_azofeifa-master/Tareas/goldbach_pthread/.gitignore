@@ -1,0 +1,4 @@
+bin/
+build/
+.vscode/ Doxyfile.bak doc/ html/ latex/
+../goldbach_serial/.vscode/

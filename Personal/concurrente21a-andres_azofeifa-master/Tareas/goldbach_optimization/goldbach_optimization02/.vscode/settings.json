@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "goldbach.h": "c",
+        "inttypes.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    }
+}

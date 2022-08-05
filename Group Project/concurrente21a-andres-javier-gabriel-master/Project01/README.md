@@ -1,6 +1,4 @@
-# goldbach-conjecture
-
-This repository is dedicated to the solution of the Goldbach Conjecture using serial and parallel coding.
+# Project 01: Concurrent server
 
 ## Los Concurrentes:
 #### Andrés Azofeifa García B90837

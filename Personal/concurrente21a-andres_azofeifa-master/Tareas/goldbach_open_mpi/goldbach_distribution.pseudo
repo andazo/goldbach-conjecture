@@ -1,0 +1,94 @@
+// Copyright 2021 Andres Azofeifa-Garcia <andres.azofeifagarcia@ucr.ac.cr>CC-BY
+// Este programa representa La Conjetura de Goldbach. En caso de que el numero
+// sea par este dara dos sumas, si el valor es impar, este dara tres sumas
+
+main:
+
+    thread_count = omp_get_max_threads()
+
+    input_casos()
+    create_matrix()
+
+    for index := 0 to size do
+        execute_Goldbach()
+    end for
+
+    printSafeMatrix()
+    
+fuerte_openMP:
+
+    #pragma omp parallel num_threads() default() shared()
+
+    goldbach_safe[id][0] = valor
+
+    #pragma omp for schedule()
+    for index := 2 to valor/2 do
+        index2 = valor - index
+        if esPrimo(index, index2) && index <= index2 then
+            if sumas = 0 then 
+                goldbach_safe[id][2] = index
+                goldbach_safe[id][3] = index
+            else 
+                temp = sumas + 2
+                goldbach_safe[id][temp] = index
+                goldbach_safe[id][temp + 1] = index
+            end if
+            #pragma omp critical()
+            sumas =+ 2
+        end if 
+    end
+    goldbach_safe[id][1] = sumas
+
+debil_openMP:
+
+    #pragma omp parallel num_threads() default() shared()
+
+    goldbach_safe[id][0] = valor
+
+    #pragma omp for schedule()
+    for index := 2 to valor/3 do 
+        if esPrimo(index) then
+            for index2 := index to valor/2 do 
+                if esPrimo(index2) then 
+                    index3 = valor - (index + index2)
+                    if index + index2 + index3 == valor then
+                        if sumas == 0 then
+                            goldbach_safe[id][2] = index
+                            goldbach_safe[id][3] = index2
+                            goldbach_safe[id][4] = index3
+                        else 
+                            temp = sumas + 3
+                            goldbach_safe[id][temp - 1] = index
+                            goldbach_safe[id][temp] = index2
+                            goldbach_safe[id][temp + 1] = index3
+                        end if
+                        #pragma omp critical()
+                        sumas += 3
+                    end if
+                end if
+            end for
+        end if
+    end for
+    goldbach_safe[id][1] = sumas
+
+run_MPI:
+
+    if MPI_Init() == MPI_SUCCESS then
+        rank = 0
+        MPI_Comm_rank()
+        MPI_Comm_size();
+        if rank = 0 then 
+        goldbach_counter = sizeof();
+        end if
+        if MPI_Bcast() == MPI_SUCCESS then 
+            if rank != 0 then
+            workers_Array = realloc()
+            end if
+        else 
+            print("Error")
+        end if
+        for index := rank to data.size do
+            execute_Goldbach()
+        end for
+        MPI_Finalize()
+    end if

@@ -1,0 +1,90 @@
+// Copyright 2021 Andres Azofeifa-Garcia <andres.azofeifagarcia@ucr.ac.cr>
+// Javier Molina-Herrera <javier.molinaherrera@ucr.ac.cr>
+// Gabriel Zúñiga-Orozco <gabriel.zunigaorozco@ucr.ac.cr> CC-BY
+// This is a pseudocode solution for the Enchanted Forest problem
+
+main:
+
+    inputFileName = programManager.getFileName()
+    inputFileDirectory = programManager.getFilePath()
+    programManager.enchantManager()
+
+enchantManager:
+
+    nights = 0
+
+    if MPI_Init() == MPI_SUCCESS then
+        rank = 0
+        numberOfProcess = 1
+        MPI_Comm_size()
+        MPI_Comm_rank()
+        for index := rank to fileManager.getMapFilesData() do 
+            nights = fileManager.getMapNights()
+            fileManager.readFileData()
+            enchanter()
+        end for
+        MPI_Finalize()
+    end if 
+
+readFileData:
+
+    while getline(inputFile, fileData) do
+        if firstLine then
+            rows =  fileData.substr(0, delimiterPosition)
+            columns = fileData
+            temporalMap = createForestMap(rows, columns)
+            isFirstLine = false;
+        else
+            for index := 0 to columns do
+                temporalMap[rows][columns] = fileData[columns]
+            end for
+            rows++
+        end if
+    end while
+
+    inputFile.close()
+
+enchanter:
+
+    if nights > 0 then
+        for index := 1 to nights do 
+            outputFileName = "positive_output/" + mapFileName
+            enchantedForest.enchantForest()
+            createFile(outputFileName)
+        end for
+    else if nights < 0 then 
+        for index := 1 to nights do
+            enchantedForest.enchantForest();
+            outputFileName = "negative_output/" + mapFileName
+            createFile(outputFileName)
+        end for
+    end else if
+
+enchantForest:
+
+    #pragma omp parallel for num_threads() collapse(2) default(none) \
+    shared(rowCounter, columnCounter , actualNight, nextNight) schedule(guided)
+    for rowIndex := 1 to rowCounter do 
+        for columnIndex := 1 to columnCounter do 
+            enchantCell()
+        end for
+    end for
+    actualNight = nextNight;
+
+enchantCell:
+    cell = actualNight[row][column]
+
+    if cell == 'a' 
+        if lakes >= 4
+            nextNight[row][column] = 'l'
+        end if
+        if trees > 4
+            nextNight[row][column] = '-'
+        end if
+    end if
+    if cell == 'l' and lakes < 3
+        nextNight[row][column] = '-'
+    end if
+    if cell == '-' and trees >= 3
+        nextNight[row][column] = 'a'
+    end if

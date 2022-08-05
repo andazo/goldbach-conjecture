@@ -1,0 +1,7 @@
+pthreads/hello_ordered_sem/hello_ordered_sem
+pthreads/hello_ordered_sem/hello_ordered_sem_asan
+pthreads/hello_ordered_sem/hello_ordered_sem_msan
+pthreads/hello_ordered_sem/hello_ordered_sem_tsan
+pthreads/hello_ordered_sem/hello_ordered_sem_ubsan
+Tareas/goldbach_serial/Desktop/
+Tareas/goldbach_serial/Doxyfile.bak

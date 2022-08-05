@@ -1,0 +1,9 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "semaphore.h": "c",
+        "stdbool.h": "c",
+        "inttypes.h": "c",
+        "goldbach.h": "c"
+    }
+}

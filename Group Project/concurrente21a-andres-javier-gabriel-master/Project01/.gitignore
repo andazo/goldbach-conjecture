@@ -1,0 +1,7 @@
+prodcons.pro
+simulation
+bin
+build
+.vscode
+doc
+../prod_cons_pattern/.vscode/

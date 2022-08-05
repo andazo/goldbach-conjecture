@@ -1,0 +1,155 @@
+int main:
+
+    WebServer::getInstance()->start()
+    return 0
+
+getInstance:
+
+    if instance == NULL then 
+        lock()
+        if !instance() then 
+            instance = new WebServer()
+        end if
+        unlock() 
+    end if
+    return instance
+
+start:
+
+    try
+        if analyzeArguments then
+            for index := 0 to max_connections do 
+                setConsumingQueue(connectionsQueue);
+                startThread();
+            end for
+            listenForConnections(port);
+            acceptAllConnections();
+        end if
+    catch runtime_error
+        print("Connection error")
+    end try catch
+
+route:
+
+    serveHomepage(httpRequest,httpResponse)
+    serveHelp(httpRequest,httpResponse)
+    URI = getURI()
+    for index := 0 to URI.length() do 
+        if URI[index] == ',' then 
+            replace ',' with "%2C"
+        end if
+    end for
+
+    regex inQuery()
+    if regex_search then 
+        vector<> numbers
+        data = matches[]
+        delmiter = "%2C"  
+        while position = find(delmiter) do
+            token = data
+            try 
+                numbers.push_back()
+            catch end catch
+            data.erase()
+        end while
+        try 
+            numbers.push_back()
+        catch 
+            if numbers.empty() then 
+                return viewClass.serveOutOfRange()
+            end if
+        end catch 
+        return viewClass.serveGoldbachSums()
+    end if
+
+HttppConnectionHandlerConsume:
+
+    aux_Socket = data
+    while true do 
+        httpRequest(aux_Socket)
+        if !httpRequest.parse() then 
+            break
+        end if
+        httpResponse(aux_Socket)
+        handled = server->handleHttpRequest()
+        if !handled || httpRequest.getHttpVersion() == "HTTP/1.0" then
+            temporalSocket.close()
+            break
+        end if
+        break
+    end while
+
+run:
+
+    consumeForever()
+    return 0
+
+createGoldbachWorkers:
+
+    GoldbachWorkers = NPROCESSORS
+    for index := 0 to GoldbachWorkers do
+        setConsumingQueue(HttppConnectionHandlerProducerQueue)
+        startThread()
+        goldbachWorkers.push_back()
+    end for
+    
+joinGoldbachWorkers:
+        
+    for index := 0 to GoldbachWorkers do 
+        goldbachWorkers[index]->waitToFinish()
+        delete(goldbachWorkers[index])
+    end for
+
+serveGoldbachSums:
+
+    responseArray = new goldbach_sums[numbers]
+
+    for index := 0 to numbers do
+        goldbachSums temporal
+        number_goldbach = numbers[index]
+        if index < -5 || index > 5 then
+            if index < -5 then
+                number_goldbach = number_goldbach * -1
+                sign = 1
+            else
+                sign = 0
+            end if
+            valid = true
+        else 
+            valid = false
+        end if
+        fillTemporal()
+        goldbachWorkQueue.push(temporal)
+    end for 
+
+    canContinue->wait()
+    fillSums()
+    response.send()
+
+GoldbachCalulatorConsume:
+
+    number = data.number_goldbach
+
+    if isValid == true then 
+        if number % 2 == 0 then
+            result = strongConjecture(data)
+            responseArray[originPosition] = result
+            doneNumbers = doneNumbers + 1
+            if doneNumbers == numbersQuantity then
+                canContinue->signal()
+            end if
+        else
+            result = weakConjecture(data)
+            responseArray[originPosition] = result
+            doneNumbers = doneNumbers + 1
+            if doneNumbers == numbersQuantity then
+                canContinue->signal()
+            end if
+        end if
+    else
+        responseArray[originPosition] = result
+        doneNumbers = doneNumbers + 1
+        if doneNumbers == numbersQuantity then
+            canContinue->signal()
+        end if
+    end if
